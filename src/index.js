@@ -1,6 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import SimpleLightbox from 'simplelightbox';
+
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchImages } from './js/fetchImages';
@@ -27,10 +28,11 @@ const onSubmit = async evt => {
       Notify.info('Enter something');
       return;
     }
+
     const galleryElements = data.hits
       .map(
-        el => `<a href="${el.largeImageURL}"><div class="photo-card">
-  <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" />
+        el => `<div class="photo-card"><a href="${el.largeImageURL}">
+  <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" /></a>
   <div class="info">
     <p class="info-item">
       <b>Likes</b>${el.likes}
@@ -45,18 +47,20 @@ const onSubmit = async evt => {
       <b>Downloads</b>${el.downloads}
     </p>
   </div>
-</div></a>`
+</div>`
       )
       .join('');
+
+    const box = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionsDelay: 250,
+    });
+
     refs.galleryEl.innerHTML = galleryElements;
+    box.refresh();
   } catch (error) {
     console.log(error);
   }
 };
 
 refs.formEl.addEventListener('submit', onSubmit);
-
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionsDelay: 250,
-});
