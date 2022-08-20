@@ -28,20 +28,20 @@ const markup = data => {
   const galleryElements = data.hits
     .map(
       el => `<div class="photo-card"><a href="${el.largeImageURL}">
-  <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" /></a>
+  <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy"/></a>
   <div class="info">
-    <p class="info-item">
-      <b>Likes</b>${el.likes}
-    </p>
-    <p class="info-item">
-      <b>Views</b>${el.views}
-    </p>
-    <p class="info-item">
-      <b>Comments</b>${el.comments}
-    </p>
-    <p class="info-item">
-      <b>Downloads</b>${el.downloads}
-    </p>
+    <h2 class="info-item">
+      <p>Likes</p>${el.likes}
+    </h2>
+    <h2 class="info-item">
+      <p>Views</p>${el.views}
+    </h2>
+    <h2 class="info-item">
+      <p>Comments</p>${el.comments}
+    </h2>
+    <h2 class="info-item">
+      <p>Downloads</p>${el.downloads}
+    </h2>
   </div>
 </div>`
     )
