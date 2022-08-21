@@ -5,7 +5,7 @@ const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '29218892-5c728a61ff7c291bb1551bea9';
 
 const options =
-  '&image_type=photo&orientation=horizontal&safesearch=true&per_page=100';
+  '&image_type=photo&orientation=horizontal&safesearch=true&per_page=40';
 
 export async function fetchImages(q, page) {
   try {
