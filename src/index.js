@@ -53,20 +53,18 @@ const markup = data => {
   });
 
   refs.galleryEl.insertAdjacentHTML('beforeend', galleryElements);
-
   refs.loadMoreBtnEl.classList.remove('is-hidden');
 
   gallery.refresh();
-  // refs.galleryEl.insertAdjacentHTML(
-  //   'beforeend',
-  //   `<button class='load-more__btn'>Load more</button>`
-  // );
 };
 
 const onSubmit = async evt => {
   evt.preventDefault();
   refs.galleryEl.innerHTML = '';
+  refs.loadMoreBtnEl.classList.add('is-hidden');
+
   try {
+    page = 1;
     const data = await fetchImages(refs.searchInputEl.value, page);
     console.log(data);
     if (!data.hits.length) {
@@ -85,11 +83,25 @@ const onSubmit = async evt => {
   }
 };
 
+async function checkNext(page) {
+  try {
+    const data = await fetchImages(refs.searchInputEl.value, page + 1);
+    if (!data.hits.length) {
+      // refs.loadMoreBtnEl.classList.add('is-hidden');
+      console.log('next array length 0');
+    }
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function loadMore() {
   try {
     page += 1;
     const data = await fetchImages(refs.searchInputEl.value, page);
     markup(data);
+    checkNext(page);
   } catch (error) {
     console.log(error);
   }
