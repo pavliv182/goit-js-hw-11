@@ -87,8 +87,7 @@ async function checkNext(page) {
   try {
     const data = await fetchImages(refs.searchInputEl.value, page + 1);
     if (!data.hits.length) {
-      // refs.loadMoreBtnEl.classList.add('is-hidden');
-      console.log('next array length 0');
+      refs.loadMoreBtnEl.classList.add('is-hidden');
     }
     return;
   } catch (error) {
